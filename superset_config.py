@@ -1,5 +1,4 @@
 import os
-from flask_caching.backends.rediscache import RedisCache
 
 SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')  # Provided by Render
 
@@ -12,21 +11,32 @@ FEATURE_FLAGS = {
     "ENABLE_TEMPLATE_PROCESSING": True,
 }
 
-REDIS_URL = os.getenv("REDIS_URL")  # e.g. redis://:password@red-xxxx:6379/1
+# Redis URL from environment variable, example: redis://:password@red-xxxx:6379/1
+REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/1")
 
-RESULTS_BACKEND = RedisCache.from_url(REDIS_URL)
+# RedisCache config for query results
+RESULTS_BACKEND = {
+    "CACHE_TYPE": "RedisCache",
+    "CACHE_DEFAULT_TIMEOUT": 300,
+    "CACHE_KEY_PREFIX": "superset_results_",
+    "CACHE_REDIS_URL": REDIS_URL,
+}
 
+# General caching config (e.g., for dashboards, charts)
 CACHE_CONFIG = {
     "CACHE_TYPE": "RedisCache",
     "CACHE_DEFAULT_TIMEOUT": 300,
     "CACHE_KEY_PREFIX": "superset_",
     "CACHE_REDIS_URL": REDIS_URL,
 }
+
+# This is used by explore view
 DATA_CACHE_CONFIG = CACHE_CONFIG
 
+# Celery (async tasks) config
 class CeleryConfig:
-    broker_url = os.getenv("REDIS_URL")  # Same or use /0
-    result_backend = os.getenv("REDIS_URL")
+    broker_url = REDIS_URL  # Typically Redis DB 0
+    result_backend = REDIS_URL
     worker_prefetch_multiplier = 1
     task_acks_late = False
 
