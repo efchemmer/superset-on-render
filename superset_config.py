@@ -31,7 +31,15 @@ REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/1")
 #     "CACHE_KEY_PREFIX": "superset_",
 #     "CACHE_REDIS_URL": REDIS_URL,
 # }
+#
+# # Celery (async tasks) config
+# class CeleryConfig:
+#     broker_url = REDIS_URL  # Typically Redis DB 0
+#     result_backend = REDIS_URL
+#     worker_prefetch_multiplier = 1
+#     task_acks_late = False
 
+# CELERY_CONFIG = CeleryConfig
 
 # REDIS LOCAL
 
@@ -47,11 +55,3 @@ CACHE_CONFIG = {
 # This is used by explore view
 DATA_CACHE_CONFIG = CACHE_CONFIG
 
-# Celery (async tasks) config
-class CeleryConfig:
-    broker_url = REDIS_URL  # Typically Redis DB 0
-    result_backend = REDIS_URL
-    worker_prefetch_multiplier = 1
-    task_acks_late = False
-
-CELERY_CONFIG = CeleryConfig
