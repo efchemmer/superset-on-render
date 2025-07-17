@@ -11,7 +11,7 @@ RUN pip install pybigquery --upgrade
 RUN mkdir -p /app/superset_home
 
 # Copy superset config
-COPY superset_config.py /app/superset_home/
+COPY superset_config.py /app/pythonpath/superset_config.py
 
 USER superset
 
