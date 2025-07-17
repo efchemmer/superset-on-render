@@ -35,7 +35,7 @@ ENV BUILD_TRANSLATIONS=${BUILD_TRANSLATIONS}
 ARG DEV_MODE="false"           # Skip frontend build in dev mode
 ENV DEV_MODE=${DEV_MODE}
 
-COPY docker/ /app/docker/
+COPY --chmod=755 docker/ /app/docker/
 # Arguments for build configuration
 ARG NPM_BUILD_CMD="build"
 
@@ -133,7 +133,7 @@ COPY requirements/translations.txt requirements/
 RUN --mount=type=cache,target=/root/.cache/uv \
     . /app/.venv/bin/activate && /app/docker/pip-install.sh --requires-build-essential -r requirements/translations.txt
 
-COPY superset/translations/ /app/translations_mo/
+COPY superset/translations/ /app/translations_mo/cd
 RUN if [ "$BUILD_TRANSLATIONS" = "true" ]; then \
         pybabel compile -d /app/translations_mo | true; \
     fi; \
