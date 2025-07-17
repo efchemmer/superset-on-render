@@ -56,3 +56,8 @@ DATA_CACHE_CONFIG = CACHE_CONFIG
 
 ## Enable current_user
 EMBEDDED_SUPERSET=True
+
+FEATURE_FLAGS = {
+    "ENABLE_TEMPLATE_PROCESSING": True,
+    "ENABLE_JINJA": True,  # THIS enables `current_user`, `user`, etc in filters like RLS
+}
