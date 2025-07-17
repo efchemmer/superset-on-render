@@ -1,5 +1,5 @@
 import os
-from flask_caching.backends.redis import RedisCache
+from flask_caching.backends.rediscache import RedisCache
 
 SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')  # Provided by Render
 
