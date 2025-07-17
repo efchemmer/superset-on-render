@@ -5,7 +5,7 @@ ENV SUPERSET_HOME=/app/superset_home
 USER root
 
 # Install Google BigQuery driver
-RUN pip install pybigquery --upgrade
+# RUN pip install pybigquery --upgrade
 
 # Ensure directories exist for config/logs
 RUN mkdir -p /app/superset_home
