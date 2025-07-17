@@ -1,14 +1,14 @@
-pybigquery==0.6.7
-packaging<25
 psycopg2-binary==2.9.9
-google-api-core==2.23.0
-google-auth==2.36.0
-google-auth-oauthlib==1.2.1
-pandas-gbq>=0.19.1
-sqlalchemy-bigquery>=1.6.1
-google-cloud-bigquery>=3.10.0
-google-cloud-bigquery-storage==2.19.1
-google-cloud-core==2.4.1
-google-crc32c==1.6.0
-google-resumable-media==2.7.2
-googleapis-common-protos==1.66.0
+# pybigquery==0.6.7
+# packaging<25
+# google-api-core==2.23.0
+# google-auth==2.36.0
+# google-auth-oauthlib==1.2.1
+# pandas-gbq>=0.19.1
+# sqlalchemy-bigquery>=1.6.1
+# google-cloud-bigquery>=3.10.0
+# google-cloud-bigquery-storage==2.19.1
+# google-cloud-core==2.4.1
+# google-crc32c==1.6.0
+# google-resumable-media==2.7.2
+# googleapis-common-protos==1.66.0
