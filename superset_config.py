@@ -1,4 +1,5 @@
 import os
+from flask_caching.backends.filesystemcache import FileSystemCache
 
 SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')  # Provided by Render
 
@@ -14,21 +15,34 @@ FEATURE_FLAGS = {
 # Redis URL from environment variable, example: redis://:password@red-xxxx:6379/1
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/1")
 
-# RedisCache config for query results
-RESULTS_BACKEND = {
-    "CACHE_TYPE": "RedisCache",
+## REDIS SERVICE
+# # RedisCache config for query results
+# RESULTS_BACKEND = {
+#     "CACHE_TYPE": "RedisCache",
+#     "CACHE_DEFAULT_TIMEOUT": 300,
+#     "CACHE_KEY_PREFIX": "superset_results_",
+#     "CACHE_REDIS_URL": REDIS_URL,
+# }
+
+# # General caching config (e.g., for dashboards, charts)
+# CACHE_CONFIG = {
+#     "CACHE_TYPE": "RedisCache",
+#     "CACHE_DEFAULT_TIMEOUT": 300,
+#     "CACHE_KEY_PREFIX": "superset_",
+#     "CACHE_REDIS_URL": REDIS_URL,
+# }
+
+
+# REDIS LOCAL
+
+RESULTS_BACKEND = FileSystemCache("/app/superset_home/sqllab")
+
+CACHE_CONFIG = {
+    "CACHE_TYPE": "FileSystemCache",
+    "CACHE_DIR": "/app/superset_home/cache",
     "CACHE_DEFAULT_TIMEOUT": 300,
-    "CACHE_KEY_PREFIX": "superset_results_",
-    "CACHE_REDIS_URL": REDIS_URL,
 }
 
-# General caching config (e.g., for dashboards, charts)
-CACHE_CONFIG = {
-    "CACHE_TYPE": "RedisCache",
-    "CACHE_DEFAULT_TIMEOUT": 300,
-    "CACHE_KEY_PREFIX": "superset_",
-    "CACHE_REDIS_URL": REDIS_URL,
-}
 
 # This is used by explore view
 DATA_CACHE_CONFIG = CACHE_CONFIG
