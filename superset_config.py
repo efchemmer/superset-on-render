@@ -51,7 +51,8 @@ CACHE_CONFIG = {
     "CACHE_DEFAULT_TIMEOUT": 300,
 }
 
-
 # This is used by explore view
 DATA_CACHE_CONFIG = CACHE_CONFIG
 
+## Enable current_user
+EMBEDDED_SUPERSET=True
