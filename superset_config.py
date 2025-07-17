@@ -3,7 +3,9 @@ from flask_caching.backends.redis import RedisCache
 
 SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')  # Provided by Render
 
-SECRET_KEY = os.getenv('SECRET_KEY', 'supersecretkey')
+SECRET_KEY = os.getenv("SECRET_KEY")
+if not SECRET_KEY:
+    raise Exception("SECRET_KEY must be set for security. Define it as an environment variable.")
 
 # Optional: Enable BigQuery
 FEATURE_FLAGS = {
